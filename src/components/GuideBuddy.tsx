@@ -14,7 +14,7 @@ export function GuideBuddy({ scene, dark, confirmed, onConfirm }: Props) {
   if (!(lineKey in PERSONAL_CONFIG.guideLines)) return null;
 
   const line = PERSONAL_CONFIG.guideLines[lineKey];
-  const farewell = scene === 'heart-draw';
+  const farewell = scene === 'finale';
 
   return (
     <AnimatePresence mode="wait">

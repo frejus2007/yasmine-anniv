@@ -127,3 +127,54 @@ export function petalBurst(x: number, y: number) {
     disableForReducedMotion: true,
   });
 }
+
+const gold = ['#fff8e8', '#c9a84a', '#ffd700', '#f0e6d0', '#ffe9a8'];
+
+/** Pluie d’étoiles dorées — révélation du ciel. */
+export function celebrateGoldenSky() {
+  const end = Date.now() + 2800;
+  const frame = () => {
+    confetti({
+      particleCount: 8,
+      spread: 80,
+      startVelocity: 26,
+      origin: { x: Math.random(), y: Math.random() * 0.45 },
+      colors: gold,
+      shapes: ['star'],
+      scalar: 0.9,
+      gravity: 0.45,
+      ticks: 180,
+      disableForReducedMotion: true,
+    });
+    if (Date.now() < end) requestAnimationFrame(frame);
+  };
+  frame();
+  setTimeout(() => {
+    confetti({
+      particleCount: 50,
+      spread: 120,
+      origin: { x: 0.5, y: 0.45 },
+      colors: gold,
+      shapes: ['star', 'circle'],
+      scalar: 1.1,
+      gravity: 0.35,
+      ticks: 220,
+      disableForReducedMotion: true,
+    });
+  }, 600);
+}
+
+export function starSparkAt(x: number, y: number) {
+  confetti({
+    particleCount: 12,
+    spread: 360,
+    startVelocity: 14,
+    origin: { x, y },
+    colors: gold,
+    shapes: ['star'],
+    scalar: 0.55,
+    gravity: 0.5,
+    ticks: 80,
+    disableForReducedMotion: true,
+  });
+}

@@ -17,37 +17,98 @@ export const PERSONAL_CONFIG = {
     'Tu es spéciale — vraiment.',
   ],
 
-  /** Code secret = 13 septembre → 1309 (accepte aussi 13/09). */
-  secretCode: '1309',
-  secretHint:
-    'Indice : ce qu’on a en commun .',
-  loveTitle: 'Mon univers pour toi',
-  loveMessage: `Yasmine,
-
-Ici, plus de surprise légère — juste mon cœur, sans filtre.
-
-Je t’aime. Pas à moitié, pas « un peu », pas en silence seulement.
-Je t’aime quand tu ris, quand tu es dans ta bulle, quand tu ne te rends même pas compte de la lumière que tu laisses derrière toi.
-
-
-Si tu lis ces lignes, sache que chaque battement ici est pour toi.
-Que tu me manques même quand tu es là.
-Que je craque pour toi, encore, et encore.
-
-Je t’aime, Yasmine.
-
-Malheureusemnt, tout ne s'est pas passé comme je l'aurais voulu
-Pas jusqu’au bout.
-Et c’est la chose la plus triste que j’aie à t’écrire ici — te laisser partir alors que mon cœur, lui, reste.
-
-Alors écoute-moi bien : sois heureuse.
-C’est le plus important. Plus important que nous, plus important que ce que j’aurais voulu garder.
-Si tu brilles, même loin de moi, alors une partie de moi sera en paix.
-
-Je t’aimerai sûrement encore en silence.
-Et je te souhaiterai le meilleur, toujours.
-
-— Fréjus`,
+  /** Carte du ciel — grande surprise de fin. */
+  nightSky: {
+    title: 'La nuit du 13 septembre',
+    subtitle: 'Le ciel de notre jour à nous',
+    entryWhisper: 'Regarde… le ciel s’ouvre rien que pour toi.',
+    lead: 'Touche chaque étoile. Une constellation va naître avec ton prénom.',
+    centerMessage:
+      'Nous partageons la même date d’anniversaire. Ce soir-là, le ciel a dû sourire deux fois.',
+    surpriseTitle: 'Ta constellation, Yasmine',
+    surpriseMessage:
+      'Huit étoiles. Huit petites vérités. Et au centre — notre 13 septembre.\n\nQuelqu’un a construit tout ça pour toi, parce que tu mérites d’être célébrée comme une étoile qu’on reconnaît tout de suite dans le ciel.',
+    surpriseCta: 'Continuer, avec le sourire',
+    /** Ordre dans lequel les traits de constellation se dessinent. */
+    constellationOrder: ['a', 'c', 'b', 'e', 'g', 'd', 'h', 'f'] as const,
+    /** Traits entre étoiles (ids). */
+    constellationLinks: [
+      ['a', 'c'],
+      ['c', 'b'],
+      ['c', 'd'],
+      ['c', 'e'],
+      ['d', 'g'],
+      ['e', 'g'],
+      ['g', 'h'],
+      ['d', 'f'],
+    ] as const,
+    stars: [
+      {
+        id: 'a',
+        x: 18,
+        y: 22,
+        size: 1.1,
+        label: 'Notre jour',
+        message: 'Le 13 septembre — le tien, le mien. Comme si le calendrier nous avait rapprochés avant même qu’on le sache.',
+      },
+      {
+        id: 'b',
+        x: 72,
+        y: 18,
+        size: 0.9,
+        label: 'Ta lumière',
+        message: 'Tu illumines la pièce sans effort. C’est une de ces choses qu’on remarque tout de suite.',
+      },
+      {
+        id: 'c',
+        x: 48,
+        y: 35,
+        size: 1.3,
+        label: '20 ans',
+        message: 'Joyeux 20 ans, Yasmine. Quelqu’un pense très fort à toi aujourd’hui — vraiment.',
+      },
+      {
+        id: 'd',
+        x: 28,
+        y: 52,
+        size: 0.85,
+        label: 'Ton sourire',
+        message: 'Tu me fais sourire, simplement. Sans artifice.',
+      },
+      {
+        id: 'e',
+        x: 82,
+        y: 48,
+        size: 1,
+        label: 'Ta douceur',
+        message: "J'aime beaucoup la personne que tu es — ta lumière, ta douceur, et la façon dont tu rends les jours plus beaux.",
+      },
+      {
+        id: 'f',
+        x: 12,
+        y: 68,
+        size: 0.75,
+        label: 'Spéciale',
+        message: 'Tu es spéciale — vraiment. Pas comme un compliment vide. Comme une évidence.',
+      },
+      {
+        id: 'g',
+        x: 58,
+        y: 62,
+        size: 1.15,
+        label: 'Un vœu',
+        message: 'Pour cette année : que tu sois heureuse. C’est le plus important.',
+      },
+      {
+        id: 'h',
+        x: 38,
+        y: 78,
+        size: 0.8,
+        label: 'Pour toi',
+        message: 'J’avais envie de créer quelque chose rien que pour toi. Merci d’être passée par ici.',
+      },
+    ],
+  },
 
   lionelIntro: {
     hello: 'Salut… moi c’est Lionel.',
@@ -63,32 +124,16 @@ Et je te souhaiterai le meilleur, toujours.
     wish: 'Écris ce que ton cœur murmure. Je m’occupe de l’envoyer tout là-haut.',
     card: 'Cette carte est pour toi. Ouvre-la doucement.',
     envelope: 'Le sceau en cœur… c’est la dernière lettre du voyage. Clique dessus.',
-    finale: 'Attends… il reste une porte que je ne peux ouvrir pour toi. Seulement toi.',
-    'secret-gate':
-      'Le code, c’est ce qu’on partage tous les deux — votre date. Jour puis mois.',
-    'heart-draw':
-      'Je m’arrête ici. Je ne peux pas aller plus loin… le reste, c’est entre Fréjus et toi.',
-  },
-
-  /** Confirmation solennelle avant le monde secret. */
-  secretConfirm: {
-    title: 'Es-tu vraiment sûre ?',
-    warning:
-      'Ce monde ne s’ouvre qu’une fois. Si tu refuses d’y entrer maintenant, il se fermera à jamais — pour de vrai. Plus personne ne pourra le rouvrir.',
-    question: 'Yasmine… veux-tu vraiment franchir cette porte ?',
-    accept: 'Oui. Je veux y entrer',
-    refuse: 'Non. Fermez ce monde pour toujours',
-    sealedTitle: 'Ce monde s’est refermé',
-    sealedMessage:
-      'Tu as choisi de ne pas y entrer. La porte s’est close pour toujours. Ce qui devait rester entre Fréjus et toi restera non dit — et c’est respecté.',
+    'night-sky':
+      'Chut… regarde bien. Le ciel va s’illuminer pour toi. Touche chaque étoile — une surprise t’attend à la fin.',
+    reply: 'Si tu veux laisser un mot à Fréjus, c’est ici. Sinon, tu peux continuer.',
+    finale: 'C’est la fin du voyage. Merci d’être passée par ici, Yasmine.',
   },
 
   /**
    * Boîte de réception Fréjus (Netlify).
-   * - Site : https://TON-SITE.netlify.app/#admin
-   * - Mot de passe : doit être identique à la variable d’environnement
-   *   ADMIN_PASSWORD sur Netlify (Site settings → Environment variables).
-   * - En local : npm run dev  (via Netlify Dev sur le port 8888)
+   * Ouvre : https://TON-SITE.netlify.app/#admin
+   * Variable Netlify : ADMIN_PASSWORD (identique à adminPassword)
    */
   adminPassword: 'frejus-1309',
   messagesApiUrl: '/api',
@@ -98,6 +143,17 @@ Et je te souhaiterai le meilleur, toujours.
     lead: 'Ce n’est pas obligatoire. Si tu as envie de lui répondre, tu peux laisser un message ici. Sinon, tu peux simplement continuer.',
     writeCta: 'Écrire un message',
     skipCta: 'Non merci, continuer',
+  },
+
+  /**
+   * Photo + mot de fin — dépose l’image dans public/photos/yasmine.jpg
+   * (jpg, png ou webp — adapte photoSrc si besoin).
+   */
+  finalePhoto: {
+    src: '/photos/yasmine.jpg',
+    alt: 'Yasmine',
+    word: 'Ta lumière.',
+    caption: 'Pour tes 20 ans — avec tout mon cœur.',
   },
 } as const;
 
@@ -109,15 +165,8 @@ export type Scene =
   | 'wish'
   | 'card'
   | 'envelope'
-  | 'finale'
-  | 'secret-gate'
-  | 'heart-draw'
-  | 'love-universe'
-  | 'reply';
+  | 'night-sky'
+  | 'reply'
+  | 'finale';
 
 export type GuideLineScene = keyof typeof PERSONAL_CONFIG.guideLines;
-
-/** Normalise une saisie de date (1309, 13/09, 13-09…) vers JJMM. */
-export function normalizeSecretCode(value: string): string {
-  return value.replace(/\D/g, '').slice(0, 4);
-}

@@ -4,15 +4,13 @@ import { AmbientBackground } from './components/AmbientBackground';
 import { CakeScene } from './components/CakeScene';
 import { CardScene } from './components/CardScene';
 import { EnvelopeScene } from './components/EnvelopeScene';
-import { FinaleScene, isSecretWorldSealed, sealSecretWorldForever } from './components/FinaleScene';
+import { FinaleScene } from './components/FinaleScene';
 import { GuideBuddy } from './components/GuideBuddy';
-import { HeartDrawScene } from './components/HeartDrawScene';
 import { InteractiveStars } from './components/InteractiveStars';
 import { IntroScene } from './components/IntroScene';
 import { LionelIntroScene } from './components/LionelIntroScene';
-import { LoveUniverseScene } from './components/LoveUniverseScene';
+import { NightSkyScene } from './components/NightSkyScene';
 import { OptionalMessageScene } from './components/OptionalMessageScene';
-import { SecretGateScene } from './components/SecretGateScene';
 import { SoundToggle } from './components/SoundToggle';
 import { WishScene } from './components/WishScene';
 import { PERSONAL_CONFIG, type Scene } from './config';
@@ -69,17 +67,14 @@ export default function App() {
   const [pointer, setPointer] = useState({ x: 0.5, y: 0.5 });
   const [compliment, setCompliment] = useState<string | null>(null);
   const [guideConfirmed, setGuideConfirmed] = useState(false);
-  const [secretSealed, setSecretSealed] = useState(() => isSecretWorldSealed());
   const sound = useSound();
 
-  const isLoveWorld =
-    scene === 'secret-gate' || scene === 'heart-draw' || scene === 'love-universe';
-  const showGuide = scene !== 'love-universe' && scene !== 'lionel-intro';
+  const isNightSky = scene === 'night-sky';
+  const showGuide = scene !== 'lionel-intro';
   const go = useCallback((next: Scene) => {
     setGuideConfirmed(false);
     setScene(next);
   }, []);
-  const enterLoveWorld = useCallback(() => go('love-universe'), [go]);
 
   const onPointerMove = (e: React.PointerEvent) => {
     setPointer({
@@ -89,7 +84,7 @@ export default function App() {
   };
 
   const onBackgroundClick = (e: React.MouseEvent) => {
-    if (isLoveWorld || scene === 'lionel-intro') return;
+    if (isNightSky || scene === 'lionel-intro') return;
     const x = e.clientX / window.innerWidth;
     const y = e.clientY / window.innerHeight;
     petalBurst(x, y);
@@ -103,14 +98,14 @@ export default function App() {
 
   return (
     <div
-      className={`app ${isLoveWorld ? 'app--love' : ''} ${scene === 'lionel-intro' ? 'app--lionel' : ''}`}
+      className={`app ${isNightSky ? 'app--night' : ''} ${scene === 'lionel-intro' ? 'app--lionel' : ''}`}
       onPointerMove={onPointerMove}
     >
-      {scene !== 'love-universe' && scene !== 'heart-draw' && scene !== 'secret-gate' && (
+      {!isNightSky && (
         <AmbientBackground pointer={pointer} onBackgroundClick={onBackgroundClick} />
       )}
 
-      <header className={`topbar ${isLoveWorld ? 'topbar--love' : ''}`}>
+      <header className={`topbar ${isNightSky ? 'topbar--night' : ''}`}>
         <div className="brand">
           <motion.span
             className="brand__heart"
@@ -124,8 +119,8 @@ export default function App() {
             <p className="brand__name">
               {scene === 'lionel-intro'
                 ? PERSONAL_CONFIG.guideName
-                : isLoveWorld
-                  ? 'Notre secret'
+                : isNightSky
+                  ? '13 septembre'
                   : 'Pour Yasmine'}
             </p>
             <motion.p
@@ -136,8 +131,8 @@ export default function App() {
             >
               {scene === 'lionel-intro'
                 ? 'ton guide pour cette aventure'
-                : isLoveWorld
-                  ? 'un univers rien qu’à nous'
+                : isNightSky
+                  ? 'la nuit de notre jour'
                   : '20 ans · un petit univers cadeau'}
             </motion.p>
           </div>
@@ -158,7 +153,7 @@ export default function App() {
       {showGuide && (
         <GuideBuddy
           scene={scene}
-          dark={isLoveWorld}
+          dark={isNightSky}
           confirmed={guideConfirmed}
           onConfirm={() => {
             sound.playClick();
@@ -167,7 +162,7 @@ export default function App() {
         />
       )}
 
-      <main className={`stage ${isLoveWorld ? 'stage--love' : ''}`}>
+      <main className={`stage ${isNightSky ? 'stage--night' : ''}`}>
         <AnimatePresence mode="wait">
           {scene === 'lionel-intro' && (
             <motion.div
@@ -288,87 +283,24 @@ export default function App() {
                 unlocked={guideConfirmed}
                 onOpen={sound.playOpen}
                 onRestart={restart}
-                onFinale={() => go('finale')}
+                onFinale={() => go('night-sky')}
               />
             </motion.div>
           )}
 
-          {scene === 'finale' && (
+          {scene === 'night-sky' && (
             <motion.div
-              key="finale"
-              className="stage__panel"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, filter: 'blur(8px)', scale: 1.05 }}
-              transition={{ duration: 0.7 }}
-            >
-              <FinaleScene
-                unlocked={guideConfirmed}
-                sealed={secretSealed}
-                onSealForever={() => {
-                  sealSecretWorldForever();
-                  setSecretSealed(true);
-                  sound.playBlow();
-                }}
-                onReplayIntro={restart}
-                onEnterSecret={() => {
-                  if (secretSealed) return;
-                  sound.playOpen();
-                  go('secret-gate');
-                }}
-                compliment={compliment}
-                onDismissCompliment={() => setCompliment(null)}
-              />
-            </motion.div>
-          )}
-
-          {scene === 'secret-gate' && (
-            <motion.div
-              key="secret-gate"
-              className="stage__panel stage__panel--wide"
-              initial={{ opacity: 0, scale: 0.94 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.06, filter: 'blur(10px)' }}
-              transition={{ duration: 0.85 }}
-            >
-              <SecretGateScene
-                unlocked={guideConfirmed}
-                onBack={() => go('finale')}
-                onFail={sound.playBlow}
-                onSuccess={sound.playSuccess}
-                onUnlock={() => {
-                  setTimeout(() => go('heart-draw'), 350);
-                }}
-              />
-            </motion.div>
-          )}
-
-          {scene === 'heart-draw' && (
-            <motion.div
-              key="heart-draw"
-              className="stage__panel stage__panel--wide"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, scale: 1.1, filter: 'blur(12px)' }}
-              transition={{ duration: 0.9 }}
-            >
-              <HeartDrawScene unlocked={guideConfirmed} onComplete={enterLoveWorld} />
-            </motion.div>
-          )}
-
-          {scene === 'love-universe' && (
-            <motion.div
-              key="love-universe"
+              key="night-sky"
               className="stage__panel stage__panel--full"
-              initial={{ opacity: 0, scale: 1.08 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, filter: 'blur(8px)' }}
+              transition={{ duration: 1 }}
             >
-              <LoveUniverseScene
-                pointer={pointer}
-                onHeartTap={sound.playClick}
-                onLeave={() => go('reply')}
+              <NightSkyScene
+                unlocked={guideConfirmed}
+                onStarTap={sound.playClick}
+                onContinue={() => go('reply')}
               />
             </motion.div>
           )}
@@ -382,6 +314,24 @@ export default function App() {
               exit={{ opacity: 0 }}
             >
               <OptionalMessageScene onDone={() => go('finale')} />
+            </motion.div>
+          )}
+
+          {scene === 'finale' && (
+            <motion.div
+              key="finale"
+              className="stage__panel"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.7 }}
+            >
+              <FinaleScene
+                unlocked={guideConfirmed}
+                onReplayIntro={restart}
+                compliment={compliment}
+                onDismissCompliment={() => setCompliment(null)}
+              />
             </motion.div>
           )}
         </AnimatePresence>
