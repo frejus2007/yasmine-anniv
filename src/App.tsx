@@ -9,8 +9,6 @@ import { GuideBuddy } from './components/GuideBuddy';
 import { InteractiveStars } from './components/InteractiveStars';
 import { IntroScene } from './components/IntroScene';
 import { LionelIntroScene } from './components/LionelIntroScene';
-import { NightSkyScene } from './components/NightSkyScene';
-import { OptionalMessageScene } from './components/OptionalMessageScene';
 import { SoundToggle } from './components/SoundToggle';
 import { WishScene } from './components/WishScene';
 import { PERSONAL_CONFIG, type Scene } from './config';
@@ -69,7 +67,6 @@ export default function App() {
   const [guideConfirmed, setGuideConfirmed] = useState(false);
   const sound = useSound();
 
-  const isNightSky = scene === 'night-sky';
   const showGuide = scene !== 'lionel-intro';
   const go = useCallback((next: Scene) => {
     setGuideConfirmed(false);
@@ -84,7 +81,7 @@ export default function App() {
   };
 
   const onBackgroundClick = (e: React.MouseEvent) => {
-    if (isNightSky || scene === 'lionel-intro') return;
+    if (scene === 'lionel-intro') return;
     const x = e.clientX / window.innerWidth;
     const y = e.clientY / window.innerHeight;
     petalBurst(x, y);
@@ -98,14 +95,12 @@ export default function App() {
 
   return (
     <div
-      className={`app ${isNightSky ? 'app--night' : ''} ${scene === 'lionel-intro' ? 'app--lionel' : ''}`}
+      className={`app ${scene === 'lionel-intro' ? 'app--lionel' : ''}`}
       onPointerMove={onPointerMove}
     >
-      {!isNightSky && (
-        <AmbientBackground pointer={pointer} onBackgroundClick={onBackgroundClick} />
-      )}
+      <AmbientBackground pointer={pointer} onBackgroundClick={onBackgroundClick} />
 
-      <header className={`topbar ${isNightSky ? 'topbar--night' : ''}`}>
+      <header className="topbar">
         <div className="brand">
           <motion.span
             className="brand__heart"
@@ -119,9 +114,7 @@ export default function App() {
             <p className="brand__name">
               {scene === 'lionel-intro'
                 ? PERSONAL_CONFIG.guideName
-                : isNightSky
-                  ? '13 septembre'
-                  : 'Pour Yasmine'}
+                : 'Pour Yasmine'}
             </p>
             <motion.p
               className="brand__sub"
@@ -131,9 +124,7 @@ export default function App() {
             >
               {scene === 'lionel-intro'
                 ? 'ton guide pour cette aventure'
-                : isNightSky
-                  ? 'la nuit de notre jour'
-                  : '20 ans · un petit univers cadeau'}
+                : '20 ans · un petit univers cadeau'}
             </motion.p>
           </div>
         </div>
@@ -153,7 +144,7 @@ export default function App() {
       {showGuide && (
         <GuideBuddy
           scene={scene}
-          dark={isNightSky}
+          dark={false}
           confirmed={guideConfirmed}
           onConfirm={() => {
             sound.playClick();
@@ -162,7 +153,7 @@ export default function App() {
         />
       )}
 
-      <main className={`stage ${isNightSky ? 'stage--night' : ''}`}>
+      <main className="stage">
         <AnimatePresence mode="wait">
           {scene === 'lionel-intro' && (
             <motion.div
@@ -283,37 +274,8 @@ export default function App() {
                 unlocked={guideConfirmed}
                 onOpen={sound.playOpen}
                 onRestart={restart}
-                onFinale={() => go('night-sky')}
+                onFinale={() => go('finale')}
               />
-            </motion.div>
-          )}
-
-          {scene === 'night-sky' && (
-            <motion.div
-              key="night-sky"
-              className="stage__panel stage__panel--full"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, filter: 'blur(8px)' }}
-              transition={{ duration: 1 }}
-            >
-              <NightSkyScene
-                unlocked={guideConfirmed}
-                onStarTap={sound.playClick}
-                onContinue={() => go('reply')}
-              />
-            </motion.div>
-          )}
-
-          {scene === 'reply' && (
-            <motion.div
-              key="reply"
-              className="stage__panel"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-            >
-              <OptionalMessageScene onDone={() => go('finale')} />
             </motion.div>
           )}
 
