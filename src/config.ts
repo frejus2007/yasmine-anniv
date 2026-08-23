@@ -8,11 +8,11 @@ export const PERSONAL_CONFIG = {
   cardMessage:
     "Je te trouve spéciale. J'aime beaucoup la personne que tu es , tu savais déjà tout ça, ta lumière, ta douceur, et la façon dont tu rends les jours plus beaux. Joyeux anniversaire, Yasmine.",
   envelopeMessage:
-    "Yasmine,\n\nPour tes 20 ans, j'ai voulu t'offrir un truc , pas grand chose, juste un petit univers. Pas une déclaration trop lourde — juste une pensée sincère : tu comptes, tu inspires, et tu mérites d'être célébrée.\n\nMerci d'être toi.\n\n— Fréjus",
+    "Yasmine,\n\n,Pour tes 20 ans, je voulais simplement prendre un moment pour te rappeler à quel point tu es une belle personne.Tu as une personnalité rare, à la fois douce, lumineuse et sincère. Tu sais apporter de la bonne humeur autour de toi, souvent sans même t’en rendre compte (je te dis ça souvent), et ta façon d’être laisse toujours une impression positive. J’apprécie beaucoup ta gentillesse, ta sensibilité, ton authenticité et cette belle énergie qui te rend unique.Tu mérites d’être entourée de personnes qui reconnaissent ta valeur et qui te souhaitent réellement le meilleur. J’espère que cette nouvelle étape de ta vie t’apportera beaucoup de bonheur, de confiance, de réussite et de beaux projets.Continue à avancer à ton rythme, à rester fidèle à toi-même et à croire en tout ce dont tu es capable. Tu as énormément de qualités, et j’espère que tu n’oublieras jamais de les voir en toi.Joyeux anniversaire pour tes 20 ans, Yasmine. Profite pleinement de cette belle journée et de tout ce que cette nouvelle année peut t’apporter.\n\nMerci d'être toi.\n\n— Fréjus",
   starCompliments: [
     'Ton sourire illumine tout.',
     "J'aime beaucoup la personne que tu es.",
-    'Tu me fais sourire, simplement.',
+    'Tu fais sourire, simplement.',
     'Ton énergie et surtout ta bonne humeur sont contagieuses.',
     'Tu es spéciale — vraiment.',
   ],
