@@ -6,14 +6,14 @@ export const PERSONAL_CONFIG = {
   introMessage:
     "J'avais envie de créer quelque chose rien que pour toi. Tu me fais sourire, et aujourd'hui quelqu'un pense très fort à toi.",
   cardMessage:
-    "Je te trouve spéciale. J'aime beaucoup la personne que tu es — ta lumière, ta douceur, et la façon dont tu rends les jours plus beaux. Joyeux anniversaire, Yasmine.",
+    "Je te trouve spéciale. J'aime beaucoup la personne que tu es , tu savais déjà tout ça, ta lumière, ta douceur, et la façon dont tu rends les jours plus beaux. Joyeux anniversaire, Yasmine.",
   envelopeMessage:
-    "Yasmine,\n\nPour tes 20 ans, j'ai voulu t'offrir un petit univers. Pas une déclaration trop lourde — juste une pensée sincère : tu comptes, tu inspires, et tu mérites d'être célébrée.\n\nMerci d'être toi.\n\n— Fréjus",
+    "Yasmine,\n\nPour tes 20 ans, j'ai voulu t'offrir un truc , pas grand chose, juste un petit univers. Pas une déclaration trop lourde — juste une pensée sincère : tu comptes, tu inspires, et tu mérites d'être célébrée.\n\nMerci d'être toi.\n\n— Fréjus",
   starCompliments: [
-    'Tu illumines la pièce sans effort.',
+    'Ton sourire illumine tout.',
     "J'aime beaucoup la personne que tu es.",
     'Tu me fais sourire, simplement.',
-    'Quelqu’un pense très fort à toi.',
+    'Ton énergie et surtout ta bonne humeur sont contagieuses.',
     'Tu es spéciale — vraiment.',
   ],
 
