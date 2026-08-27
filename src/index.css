@@ -9,6 +9,8 @@
   --radius: 18px;
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-hand: 'Caveat', 'Segoe Script', cursive;
+  --font-sign: 'Great Vibes', 'Snell Roundhand', cursive;
   color: var(--ink);
   background: var(--cream);
   font-family: var(--font-body);

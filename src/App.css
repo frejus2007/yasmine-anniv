@@ -1088,7 +1088,7 @@
 }
 
 .letter {
-  width: min(420px, 100%);
+  width: min(440px, 100%);
 }
 
 .letter__paper {
@@ -1099,6 +1099,118 @@
   text-align: left;
   box-shadow: 0 22px 44px rgba(90, 76, 70, 0.12);
   min-height: 280px;
+}
+
+.letter__paper--hand {
+  position: relative;
+  max-height: min(62dvh, 520px);
+  overflow-y: auto;
+  cursor: pointer;
+  background:
+    linear-gradient(180deg, rgba(255, 254, 251, 0.92), rgba(247, 238, 230, 0.96)),
+    repeating-linear-gradient(
+      transparent,
+      transparent 31px,
+      rgba(212, 180, 160, 0.18) 32px
+    );
+  background-size: 100% 100%, 100% 32px;
+}
+
+.letter__handwriting {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 1.38rem;
+  font-weight: 600;
+  line-height: 1.55;
+  color: #3a322e;
+  white-space: pre-wrap;
+  letter-spacing: 0.01em;
+}
+
+.letter__from-name {
+  margin: 1.1rem 0 0;
+  font-family: var(--font-hand);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #4a3c36;
+}
+
+.letter__signature {
+  margin: 0.15rem 0 0.4rem;
+  font-family: var(--font-sign);
+  font-size: 2.55rem;
+  line-height: 1.1;
+  color: #2f2824;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 0;
+}
+
+.letter__signature.is-writing {
+  animation: signature-write 1.9s ease-out forwards;
+}
+
+.letter__signature.is-done {
+  max-width: 14rem;
+}
+
+@keyframes signature-write {
+  from { max-width: 0; }
+  to { max-width: 14rem; }
+}
+
+.letter__caret {
+  display: inline-block;
+  width: 1px;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: #5a4c46;
+  animation: caret-blink 0.7s steps(1) infinite;
+}
+
+.letter__caret--sign {
+  height: 1.6em;
+  background: transparent;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+.letter__hand {
+  position: absolute;
+  width: 78px;
+  height: 96px;
+  pointer-events: none;
+  z-index: 3;
+  transform: translate(-6px, 2px);
+  filter: drop-shadow(0 10px 10px rgba(62, 44, 32, 0.28));
+  transition: left 0.07s linear, top 0.07s linear;
+}
+
+.letter__hand-svg {
+  width: 100%;
+  height: 100%;
+  animation: pen-nudge 0.28s ease-in-out infinite alternate;
+  transform-origin: 46px 8px;
+}
+
+.letter__hand.is-signing {
+  transition: none;
+  animation: hand-across 1.9s ease-out forwards;
+}
+
+@keyframes hand-across {
+  from { transform: translate(-6px, 2px); }
+  to { transform: translate(118px, 6px); }
+}
+
+.letter__hint {
+  margin: 0.85rem 0 0;
+  font-size: 0.82rem;
+  text-align: center;
+  color: color-mix(in srgb, var(--brown) 70%, transparent);
 }
 
 .letter__line {
@@ -3067,5 +3179,16 @@
   .night-sky__line {
     animation: none !important;
     stroke-dashoffset: 0;
+  }
+
+  .letter__hand-svg,
+  .letter__hand.is-signing,
+  .letter__signature.is-writing,
+  .letter__caret {
+    animation: none !important;
+  }
+
+  .letter__signature {
+    max-width: 14rem;
   }
 }
